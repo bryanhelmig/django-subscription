@@ -10,23 +10,23 @@ payments.
 
 Table of Contents
 =================
-1 Installation
-2 Settings
-3 Models
-    3.1 Subscription
-        3.1.1 methods
-    3.2 UserSubscription
-        3.2.1 methods
-    3.3 Transaction
-4 Signals
-5 Views
-6 URLs
-7 Templates
-8 Subscription change
-9 Example code
-10 Bugs and omissions
-    10.1 Plans
-11 License
+1. Installation
+2. Settings
+3. Models
+    1. Subscription
+        1. methods
+    2. UserSubscription
+        1. methods
+    3. Transaction
+4. Signals
+5. Views
+6. URLs
+7. Templates
+8. Subscription change
+9. Example code
+10. Bugs and omissions
+    1. Plans
+11. License
 
 
 ## 1 Installation
