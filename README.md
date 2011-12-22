@@ -29,8 +29,7 @@ Table of Contents
 11 License
 
 
-1 Installation
-~~~~~~~~~~~~~~
+## 1 Installation
   Copy or symlink `subscription/' directory on Python path (`setup.py'
   script for automated installation will be supplied later on). Module
   contents are available in the `subscription' module.
@@ -38,8 +37,7 @@ Table of Contents
   In order to use application, add `subscription' to INSTALLED_APPS in
   Django project `settings.py' file.
 
-2 Settings
-~~~~~~~~~~
+## 2 Settings
   In project's `settings.py' file `SUBSCRIPTION_PAYPAL_SETTINGS'
   should be set to a dictionary with default PayPal button settings,
   as described in django-paypal documentation. At least the `business'
@@ -59,13 +57,11 @@ Table of Contents
   after it; this way we avoind unintentionally locking out user
   account.
 
-3 Models
-~~~~~~~~
+## 3 Models
   Two models defined by the application are available in the
   `subscription.models' module.
 
-3.1 Subscription
-================
+### 3.1 Subscription
    Main model used by the application is `Subscription'.  It
    represents a single subscription available for users.  Subscription
    has following fields:
@@ -84,8 +80,7 @@ Table of Contents
      `django.contrib.auth.models.Group'.  Subscription is identified
      by the group.
 
-3.1.1 methods
--------------
+#### 3.1.1 methods
     - `price_per_day()' - returns estimate subscription price per day,
       as a float.  This value is used to give user that upgrades
       subscription a rebate for unused part of month.  Value is only
@@ -94,8 +89,7 @@ Table of Contents
     - `get_pricing_display()' - return pretty pricing info for display
       as a string.
 
-3.2 UserSubscription
-====================
+### 3.2 UserSubscription
    This model instances define a user's subscription.  Model has
    following fields:
    - `user' - one-to-one relation to `auth.User' model, primary key;
@@ -123,8 +117,7 @@ Table of Contents
    effective value of `SUBSCRIPTION_GRACE_PERIOD' setting as
    `datetime.timedelta' object.
 
-3.2.1 methods
--------------
+#### 3.2.1 methods
     - `user_is_group_member()' - returns true if `user' is member of
       `subscription.group';
     - `expired()' - returns true if there is more than
@@ -153,8 +146,7 @@ Table of Contents
     Alternatively, `fix()' can be called on events related to
     user, e.g. on user login.
 
-3.3 Transaction
-===============
+### 3.3 Transaction
    `Transaction' model is mostly read-only and is used to view
    subscription-related events in the admin panel. It has following
    fields:
@@ -187,8 +179,7 @@ Table of Contents
    In admin panel's `Transaction' object list, fields `subscription',
    `user', `ipn' are links to related modes instance's admin forms.
 
-4 Signals
-~~~~~~~~~
+## 4 Signals
   On subscription-related events, the application sends signals that
   project code can connect to and do some site-specific things (e.g.
   send a nice e-mail to user).  Signals are available in
@@ -220,8 +211,7 @@ Table of Contents
   listener should return `None', otherwise it should return a string
   describing reason that will be displayed to user.
 
-5 Views
-~~~~~~~
+## 5 Views
   Views are available in `subscription.views' module
   - `subscription_list' lists available subscription using
     `subscription/subscription_list.html' template
@@ -229,8 +219,7 @@ Table of Contents
     subscription (login is required for this view) along with PayPal
     button for subscription or upgrade.
 
-6 URLs
-~~~~~~
+## 6 URLs
   Module `subscription.urls' configures default urls for module.  This
   are:
   - root URL displays `subscription_list' view
@@ -247,8 +236,7 @@ Table of Contents
   - `cancel/' displays `subscription/subscription_cancel.html'
     template and is where cancelled PayPal transactions are redirected
 
-7 Templates
-~~~~~~~~~~~
+## 7 Templates
   Templates `subscription/subscription_done.html' and
   `subscription/subscription_cancel.html' receive no context.
 
@@ -275,8 +263,7 @@ Table of Contents
     site's merchant account, making it easier to cancel the old
     subscription.
 
-8 Subscription change
-~~~~~~~~~~~~~~~~~~~~~
+## 8 Subscription change
   Most complex flow in this app is when user wants to change (upgrade)
   current subscription.  For subscriptions we are using PayPal
   standard subscriptions API.  This means, we get three kinds of
@@ -352,24 +339,20 @@ Table of Contents
   inactive UserSubscription objects, cancel was probably a mistake)
   and notify user of his mistake.
 
-9 Example code
-~~~~~~~~~~~~~~
+## 9 Example code
   Example usage and templates are available as `django-saas-kit'
   project at [http://github.com/saas-kit/django-saas-kit/]
 
-10 Bugs and omissions
-~~~~~~~~~~~~~~~~~~~~~
+## 10 Bugs and omissions
   - There is no `setup.py' script for automated installation.
   - No support for PayPal PDT; PDT has only presentational value (IPN
     needs to be received anyway, and PDT should be used only to
     display transaction details to user on after transaction landing
     page), so support for it has been intentionally omitted.
 
-10.1 Plans
-==========
+### 10.1 Plans
   - Single payments for subscription, including possibility of
     pay-as-you-go scheme
 
-11 License
-~~~~~~~~~~
+## 11 License
   This project is licensed on terms of GPL (GPL-LICENSE.txt) licenses. 
